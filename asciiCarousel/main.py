@@ -20,8 +20,16 @@ import sys
 import pickle
 from data.database import SqliteClient 
 from picture import Picture
-#from rembg import remove
 
+#############################  IA ##########################################
+#========Borrar fondo con rembg +líneas de la 205 a la 211==================
+#from rembg import remove
+#===========================================================================
+#======Borrar fondo con backgroundremover + líenas de 199 a 213=============
+#https://pypi.org/project/backgroundremover/
+from backgroundremover.bg import remove
+#===========================================================================
+############################################################################
 
 class Cancellation():
     def __init__(self):
@@ -120,13 +128,11 @@ def loading_animation(*cancellation):
         if cancel.is_cancelled==True: break
         for i in range(4):
             if i==3: i=0
-            sys.stdout.write(f'\rCargando... {characters[i]}')
+            sys.stdout.write(f'\rLoading... {characters[i]}')
             sys.stdout.flush()
             time.sleep(0.1)
-
-    
+  
         
-
 def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("--notshow")] = False, rembg: Annotated[bool, typer.Option("--rembg")] = False):       
     ascii=[]    
     app_name="asciiCarousel"
@@ -154,9 +160,12 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
     image2=None
     
     while True:
+        print("Please wait loading asciiCarousel")
         #Cambia el tamanio del terminal
-        cmd = 'mode 118'
+        #cmd = 'mode 118'
+        cmd = 'echo Please wait loading asciiCarousel...'
         os.system(cmd)
+        #os.system('echo Please wait loading asciiCarousel...')
         #Limpiamos el terminal
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Options: Mode", mode, ", color: ",color, ", not show: ",notshow,", remove bg: ", rembg)
@@ -184,16 +193,31 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
                 image.show()
                 
             """
-            #==========================Borrar fondo============================
+            #==========================Borrar fond con rembg============================
             if (rembg):
                 image=open(FILE_NAME, 'rb')
                 imageBytes=remove(image.read())
                 open(FILE_NAME, 'wb').write(imageBytes)
                 image=Image.open(FILE_NAME)
-            #==================================================================
+            #===========================================================================
             """
-            
-            
+
+            #==================Borrar fondo con backgroundremover=======================
+            if (rembg):
+                model_choices = ["u2net", "u2net_human_seg", "u2netp"]
+                f = open(FILE_NAME, "rb")
+                data = f.read()
+                img = remove(data, model_name=model_choices[0],
+                            alpha_matting=True,
+                            alpha_matting_foreground_threshold=240,
+                            alpha_matting_background_threshold=10,
+                            alpha_matting_erode_structure_size=10,
+                            alpha_matting_base_size=1000)
+                f.close()
+                image = open(FILE_NAME, "wb")
+                image.write(img)
+            #============================================================================
+                        
             #Obtenemos la imagen identificada
             file_identify=get_identify_file2(FILE_NAME)
             #Extraemos la información de los caracteres de la imagen
@@ -376,7 +400,8 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
             rembg=True
         # S->Exit
         elif(response == "s" or response == "S"):
-            break          
+            break 
+            
 
 if __name__ == "__main__":
 

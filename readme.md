@@ -60,6 +60,6 @@ https://github.com/kikemadrigal/Python-desktop-asciiCarousel/releases/download/v
    debe quedar así:
    <img src="assets/readme/help2.JPG" width="200px" />
 4. Escibe en el terminal o cmd: pip install -r requirements.txt
-5. Para poder utilizar las funciones de borrado del fondo, escrie en el terminal o cmd  pip install rembg
-6. Situate dentro del directorio de asciiCarousel y dentro escribe: python -m PyInstaller --onefile --console --icon=..\assets\icon.ico --clean -y -n "asciiCarousel" main.py
+5. Para poder utilizar las funciones de borrado del fondo, escrie en el terminal o cmd  pip install backgroundremover para utilizar el paquete backgroundremover (https://pypi.org/project/backgroundremover/) que es el utilizado o pip install rembg para utilizar el paquete rembg (https://pypi.org/project/rembg/)
+6. Para crear el binario o ejecutable: situate dentro del directorio de asciiCarousel y dentro escribe: python -m PyInstaller --onefile --console --icon=..\assets\icon.ico --clean -y -n "asciiCarousel" main.py
 7. Para crear el instalador utiliza el programa innosetup: https://jrsoftware.org/isdl.php
