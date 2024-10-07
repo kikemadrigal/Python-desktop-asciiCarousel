@@ -21,11 +21,16 @@ Ahora puedes usar estos comandos:
  Usage: asciiCarousel [OPTIONS]
 
 Options:                                                                                                            
-│ --mode    INTEGER [default: 1] Selecciona 0 para blanco y negro, 1 para colores) 
-│ --color   TEXT [default: white] El color del texto, solo en modo 0)
-│ --notshow Para no mostrar la previsualización                              
-│ --rembg   Para usar remove background                               
+│ --mode    INTEGER [default: 1] Selecciona 0 para blanco y negro, 1 para colores
+
+│ --color   TEXT [default: white] El color del texto, solo en modo 0
+
+│ --notshow Para no mostrar la previsualización   
+
+│ --rembg   Para usar remove background      
+
 │ --help    Show this message and exit.   
+
 
 Examples:
 
