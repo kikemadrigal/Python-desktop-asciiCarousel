@@ -56,7 +56,6 @@ def show_menu()->str:
 def print_ascii(ascii:list, color:str="white")->None:
     """Muestra el resultado en pantalla
         Se le puede pasar un color"""
-
     columns_in_terminal=os.get_terminal_size().columns
     typer.secho("#"*columns_in_terminal, fg=typer.colors.GREEN, bg=typer.colors.WHITE)
     typer.secho("#"*columns_in_terminal, fg=typer.colors.GREEN, bg=typer.colors.WHITE)
@@ -138,15 +137,17 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
     PATH_ASSETS = absolute_dir+"assets\\"
     FILE_NAME = PATH_ASSETS+"temp.png"
     PATH_IMAGES = PATH_ASSETS+"images\\"
+    DATABASE = PATH_ASSETS+"database.db"
     if not os.path.isdir(absolute_dir):
         os.mkdir(absolute_dir)
     if not os.path.isdir(PATH_ASSETS):
         os.mkdir(PATH_ASSETS)
     #C:\\Users\\kikem\\AppData\\Local\\asciiCarousel\\assets\\images\\
+    #C:\Users\kikem\AppData\Local\asciiCarousel\assets
     if not os.path.isdir(PATH_IMAGES):
         os.mkdir(PATH_IMAGES)
 
-    database=SqliteClient(PATH_ASSETS,1)
+    database=SqliteClient(DATABASE,1)
     #image es la imagen en su tamaño natural
     image=None
     #image2 es la imagen final modificada
@@ -158,6 +159,7 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
         os.system(cmd)
         #Limpiamos el terminal
         os.system('cls' if os.name == 'nt' else 'clear')
+        print("Options: Mode", mode, ", color: ",color, ", not show: ",notshow,", remove bg: ", rembg)
         # Crear y ejecutar el hilo de la animación
         cancel_animation = Cancellation()
         loading_thread = threading.Thread(target=loading_animation, args=(cancel_animation, 1,2))
@@ -188,7 +190,6 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
                 imageBytes=remove(image.read())
                 open(FILE_NAME, 'wb').write(imageBytes)
                 image=Image.open(FILE_NAME)
-         
             #==================================================================
             """
             
@@ -336,7 +337,7 @@ def main(mode:int=1, color:str="white", notshow: Annotated[bool, typer.Option("-
             notshow=True
             rembg=False
         # 0-3->Mode 0, not preview & remove background
-        elif(response == "0-2"):
+        elif(response == "0-3"):
             color="white"
             mode=0
             notshow=True

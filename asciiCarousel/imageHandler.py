@@ -9,7 +9,7 @@ from constants import ascii_table,color_9_palette_rgb
 import json
 import os
 from picture import Picture
-
+import datetime
 
 def similar(r1,g1,b1,r2,g2,b2):
     return ((r1-r2)**2+(g1-g2)**2+(b1-b2)**2)**0.5
@@ -58,7 +58,9 @@ def get_picture()->Picture:
             url_image="https://breeds.tipolisto.es/"+i['path_image']
             print("Get image from: "+url_image)
             img = Image.open(BytesIO(requests.get(url_image).content))
-            return Picture(i['name_es'], img, None)
+            name=i['name_es'].replace("?","-")
+            name=name+datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            return Picture(name, img, None)
         except:
             print("Error no se pudo acceder a la imagen: "+i['path_image'])
             return None

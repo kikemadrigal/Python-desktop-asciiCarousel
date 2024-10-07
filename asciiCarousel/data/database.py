@@ -10,9 +10,9 @@ class ImageReference():
 
 
 class SqliteClient():
-    def __init__(self,PATH_ASSETS:str, version:int):
+    def __init__(self,DATABASE:str, version:int):
         self.version=version
-        self.conn=sqlite3.connect(PATH_ASSETS+"database.db")
+        self.conn=sqlite3.connect(DATABASE)
         self.cursor=self.conn.cursor()
         self.cursor.execute("""CREATE TABLE IF NOT EXISTS images (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,

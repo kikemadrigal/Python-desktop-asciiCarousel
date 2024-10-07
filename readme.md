@@ -3,7 +3,9 @@
 Es un programa cmd que te muestra imágenes de animales descargadas de internet en ascii,
 y que puedes agregar a tu lista para después comenzar el carrusel de imágenes pulsando la tela c.
 
+<img src="assets/readme/readme0-0.JPG" width="800px" height="200px" />
 
+<img src="assets/readme/readme0-1.png" width="800px" />
 
 
 
@@ -18,13 +20,12 @@ cd C:\Program Files\asciiCarousel
 Ahora puedes usar estos comandos:
  Usage: asciiCarousel [OPTIONS]
 
-╭─options─────────────── 
-
-│ --mode    INTEGER     [default:1]      Elige entre el modo 0 o 1 para blanco y negro y color                                                
-│ --color   TEXT        [default:white]  Modifica el color blanco en el modo 0 por el yellow, red, blue, green                                            
-│ --notshow TEXT        [default:False]  Oculta las imágenes de previsualización                                          
-│ --help                [default:False]  Muestra esta ayuda                                                 
-╰───────────────────────
+Options:                                                                                                            
+│ --mode    INTEGER [default: 1] Selecciona 0 para blanco y negro, 1 para colores) 
+│ --color   TEXT [default: white] El color del texto, solo en modo 0)
+│ --notshow Para no mostrar la previsualización                              
+│ --rembg   Para usar remove background                               
+│ --help    Show this message and exit.   
 
 Examples:
 
